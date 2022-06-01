@@ -82,7 +82,7 @@ let handleFilter = (evt) => {
 
     let foundMovies = filteredMovies.filter((movie) => movie.title.match(regex));
 
-
+    lo
 
     renderMovies(foundMovies);
 };
