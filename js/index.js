@@ -61,14 +61,70 @@ let renderCategories = () => {
 renderCategories()
 
 
+let sortMovies = {
+    az: (a, b) => {
+        if (a.title.toLowerCase() < b.title.toLowerCase()) {
+            return -1;
+        }
+        else {
+            return 1;
+        }
+    },
+
+    za: (a, b) => {
+        if (a.title.toLowerCase() < b.title.toLowerCase()) {
+            return 1;
+        }
+        else {
+            return -1;
+        }
+    },
+
+    hl: (a, b) => {
+        if (a.imdbRating < b.imdbRating) {
+            return 1;
+        }
+        else {
+            return -1;
+        }
+    },
+
+    lh: (a, b) => {
+        if (a.imdbRating < b.imdbRating) {
+            return -1;
+        }
+        else {
+            return 1;
+        }
+    },
+
+    on: (a, b) => {
+        if (a.year < b.year) {
+            return -1;
+        }
+        else {
+            return 1;
+        }
+    },
+
+    no: (a, b) => {
+        if (a.year < b.year) {
+            return 1;
+        }
+        else {
+            return -1;
+        }
+    }
+}
+
 
 let handleFilter = (evt) => {
     evt.preventDefault();
 
     let filteredMovies = [];
     let selectValue = elSelect.value;
-
-    let elSearchValue = elSearch.value.trim()
+    let elSearchValue = elSearch.value.trim();
+    let sort = elRatingSelect.value;
 
     let regex = new RegExp(elSearchValue, 'gi')
 
@@ -82,7 +138,8 @@ let handleFilter = (evt) => {
 
     let foundMovies = filteredMovies.filter((movie) => movie.title.match(regex));
 
-    lo
+    foundMovies.sort(sortMovies[sort]);
+
 
     renderMovies(foundMovies);
 };
