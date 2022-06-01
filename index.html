@@ -16,30 +16,35 @@
 
         <form class="d-flex mb-5 js-form">
             <select class="form-select js-select">
-                <option value="All">All</option>
+                <option value="all">All</option>
             </select>
-            <input class="form-control mx-3" type="text" placeholder="search">
+            <input class="form-control mx-3 js-search" type="text" placeholder="search">
 
-            <select class="form-select">
-                <option value="">Aa-Zz</option>
-                <option value="">Zz-Aa</option>
-                <option value="">10-1</option>
-                <option value="">1-10</option>
-                <option value="">Old-New</option>
-                <option value="">New-Old</option>
+            <select class="form-select select-rating">
+                <option value="az">Aa-Zz</option>
+                <option value="za">Zz-Aa</option>
+                <option value="hl">10-1</option>
+                <option value="lh">1-10</option>
+                <option value="on">Old-New</option>
+                <option value="no">New-Old</option>
             </select>
             <button class="btn btn-success ms-4" type="submit">Search</button>
         </form>
 
         <div class="wrapper d-flex flex-wrap">
             <template id="template">
-                <div class="card mx-2 my-3" style="width: 18rem;">
+                <div class="card mx-2 my-3 shadow-lg border-2 border-info" style="width: 18rem;">
                     <img src="https://picsum.photos/200/100" class="card-img-top" alt="image" loading="lazy">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                        <h5 class="card-title text-danger">Card title</h5>
+                        <p class="card-text text-success">Some quick example text to build on the card title and make up
+                            the bulk of
                             the
                             card's content.</p>
+
+                        <p class="js-year text-primary"></p>
+                        <p class="js-rating text-warning"></p>
+
                         <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
                 </div>

@@ -1,8 +1,10 @@
 let KINOLAR = movies.slice(0, 500);
 let elForm = document.querySelector('.js-form');
-let elWarapper = document.querySelector('.wrapper')
-let elTemplate = document.getElementById('template').content;
 let elSelect = document.querySelector('.js-select');
+let elSearch = document.querySelector('.js-search');
+let elRatingSelect = document.querySelector('.select-rating');
+let elWarapper = document.querySelector('.wrapper');
+let elTemplate = document.getElementById('template').content;
 
 
 let renderMovies = (arr) => {
@@ -12,11 +14,17 @@ let renderMovies = (arr) => {
         let title = elCard.querySelector('.card-title');
         let categories = elCard.querySelector('.card-text');
         let img = elCard.querySelector('.card-img-top');
+        let year = elCard.querySelector('.js-year');
+        let rating = elCard.querySelector('.js-rating');
+
 
         title.textContent = movie.title;
         categories.textContent = movie.categories;
         img.src = movie.bigPoster;
-        img.height = "150"
+        img.height = "150";
+        year.textContent = 'Year' + ' ' + movie.year;
+        rating.textContent = 'Rating' + ' ' + movie.imdbRating + '⭐';
+
 
         elWarapper.appendChild(elCard)
     });
@@ -60,6 +68,10 @@ let handleFilter = (evt) => {
     let filteredMovies = [];
     let selectValue = elSelect.value;
 
+    let elSearchValue = elSearch.value.trim()
+
+    let regex = new RegExp(elSearchValue, 'gi')
+
     if (selectValue === 'all') {
         filteredMovies = KINOLAR;
     }
@@ -67,8 +79,14 @@ let handleFilter = (evt) => {
         filteredMovies = KINOLAR.filter((movie) => movie.categories.includes(selectValue));
     }
 
-    renderMovies(filteredMovies);
+
+    let foundMovies = filteredMovies.filter((movie) => movie.title.match(regex));
+
+
+
+    renderMovies(foundMovies);
 };
+
 
 elForm.addEventListener('submit', handleFilter);
 renderMovies(KINOLAR);
