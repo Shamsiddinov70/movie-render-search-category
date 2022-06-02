@@ -1,11 +1,20 @@
-let KINOLAR = movies.slice(0, 500);
+let KINOLAR = movies.slice(0, 50);
 let elForm = document.querySelector('.js-form');
 let elSelect = document.querySelector('.js-select');
 let elSearch = document.querySelector('.js-search');
 let elRatingSelect = document.querySelector('.select-rating');
+let elBookmarkBox = document.querySelector('.bookmark-box');
 let elWarapper = document.querySelector('.wrapper');
 let elTemplate = document.getElementById('template').content;
+let elBookmarkBtn = document.querySelector('.js-bookmark');
 
+let elPageCounter = document.querySelector('.page-counter');
+let elPrevBtn = document.querySelector('.prev-btn');
+let elNextBtn = document.querySelector('.next-btn');
+
+let page = 1;
+let limit = 8;
+let maxPageCounter = Math.ceil(KINOLAR.length / limit);
 
 let renderMovies = (arr) => {
     elWarapper.innerHTML = null;
@@ -17,6 +26,19 @@ let renderMovies = (arr) => {
         let year = elCard.querySelector('.js-year');
         let rating = elCard.querySelector('.js-rating');
 
+        let elBookmarkBtn = elCard.querySelector('.js-bookmark')
+
+        let handleBookmarkBtn = () => {
+            let result = []
+            console.log('bosildi');
+            elBookmarkBox.textContent = movie.title;
+            result.push(movie.title)
+            localStorage.setItem('movies', JSON.stringify(result))
+        }
+        // handleBookmarkBtn(movie)
+
+        // renderMovies(handleBookmarkBtn)
+        elBookmarkBtn.addEventListener('click', handleBookmarkBtn);
 
         title.textContent = movie.title;
         categories.textContent = movie.categories;
@@ -145,5 +167,41 @@ let handleFilter = (evt) => {
 };
 
 
+elPageCounter.textContent = page;
+
+let handleNextPage = () => {
+    page += 1;
+
+    if (page <= maxPageCounter) {
+        elPageCounter.textContent = page;
+        renderMovies(KINOLAR.slice(limit * (page - 1), limit * page))
+    }
+
+    if (page === maxPageCounter) {
+        elNextBtn.disabled = true;
+    }
+    else {
+        elPrevBtn.disabled = false;
+        elNextBtn.disabled = false;
+    }
+};
+
+elPrevBtn.disabled = true;
+
+let handlePrevPage = () => {
+    page -= 1;
+
+    if (page > 0) {
+        elPageCounter.textContent = page;
+        renderMovies(KINOLAR.slice(limit * (page - 1), limit * page))
+    }
+    if (page === 0) {
+        elPrevBtn.disabled = true;
+    }
+}
+
+
+elPrevBtn.addEventListener('click', handlePrevPage);
+elNextBtn.addEventListener('click', handleNextPage);
 elForm.addEventListener('submit', handleFilter);
 renderMovies(KINOLAR);

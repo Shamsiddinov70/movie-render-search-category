@@ -31,6 +31,17 @@
             <button class="btn btn-success ms-4" type="submit">Search</button>
         </form>
 
+        <button class="btn btn-danger mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+            aria-expanded="false" aria-controls="collapseExample">
+            ♥ Bookmarks
+        </button>
+
+        <div class="collapse" id="collapseExample">
+            <div class="card card-body bookmark-box">
+
+            </div>
+        </div>
+
         <div class="wrapper d-flex flex-wrap">
             <template id="template">
                 <div class="card mx-2 my-3 shadow-lg border-2 border-info" style="width: 18rem;">
@@ -45,11 +56,24 @@
                         <p class="js-year text-primary"></p>
                         <p class="js-rating text-warning"></p>
 
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <button
+                            class="bookmark-btn btn btn-outline-danger font-weight-bold js-movie-bookmark js-bookmark">♥
+                            Bookmark</button>
                     </div>
                 </div>
             </template>
         </div>
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination list-unstyled">
+                <li class="page-counter page-link disabled"></li>
+
+                <li class="page-item prev-btn"><button class="page-link" href="#">Previous</button>
+                </li>
+
+                <li class="page-item next-btn"><button class="page-link" href="#">Next</button></li>
+            </ul>
+        </nav>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
